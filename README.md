@@ -80,7 +80,7 @@ $response = <<<XML
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
    <SOAP-ENV:Body>
         <ns1:AddResponse xmlns:ns1="http://tempuri.org/">
-          <ns1:AddResult>3</ns1:AddResult>
+          <ns1:AddResult>4</ns1:AddResult>
         </ns1:AddResponse>
    </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
@@ -95,7 +95,7 @@ Output:
 ```php
 stdClass Object
 (
-    [AddResult] => 3
+    [AddResult] => 4
 )
 ```
 
