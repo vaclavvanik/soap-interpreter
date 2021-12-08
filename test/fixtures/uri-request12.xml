@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="https://example.com/say-hello/"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:enc="http://www.w3.org/2003/05/soap-encoding">
+    <env:Body>
+        <ns1:sayHello env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+            <param0 xsi:type="xsd:string">Venca</param0>
+        </ns1:sayHello>
+    </env:Body>
+</env:Envelope>

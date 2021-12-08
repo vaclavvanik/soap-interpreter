@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="https://example.com/say-hello/types">
+    <env:Body>
+        <ns1:name>Hello Venca</ns1:name>
+    </env:Body>
+</env:Envelope>

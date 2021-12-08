@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="SayHello" targetNamespace="https://example.com/say-hello" xmlns:tns="https://example.com/say-hello" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="https://example.com/say-hello/types">
+  <types>
+    <xsd:schema targetNamespace="https://example.com/say-hello/types" xmlns="https://example.com/say-hello/types">
+      <xsd:element name="name" type="xsd:string"/>
+    </xsd:schema>
+  </types>
+  <message name="sayHelloRequest">
+    <part name="name" element="ns:name"/>
+  </message>
+  <message name="sayHelloResponse">
+    <part name="name" element="ns:name"/>
+  </message>
+  <portType name="SayHelloPortType">
+    <operation name="sayHello">
+      <input message="tns:sayHelloRequest"/>
+      <output message="tns:sayHelloResponse"/>
+    </operation>
+  </portType>
+  <binding name="SayHelloBinding" type="tns:SayHelloPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="sayHello">
+      <soap:operation soapAction="https://example.com/say-hello/#sayHello"/>
+      <input>
+        <soap:body use="literal" namespace="https://example.com/say-hello"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://example.com/say-hello"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="SayHelloService">
+    <port name="SayHelloPort" binding="tns:SayHelloBinding">
+      <soap:address location="https://example.com/soap11/say-hello"/>
+    </port>
+  </service>
+</definitions>

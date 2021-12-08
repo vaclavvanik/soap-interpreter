@@ -1,0 +1,44 @@
+{
+  "name": "vaclavvanik/soap-interpreter",
+  "description": "An easy way to handle WSDL data with zero dependencies",
+  "license": "MIT",
+  "type": "library",
+  "homepage": "https://github.com/vaclavvanik/soap-interpreter",
+  "keywords": [
+    "soap",
+    "wsdl",
+    "request",
+    "response"
+  ],
+  "authors": [
+    {
+      "name": "Václav Vaník",
+      "email": "vaclav.vanik@gmail.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^7.3 || ^8.0",
+    "ext-soap": "*"
+  },
+  "require-dev": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "VaclavVanik\\Soap\\Interpreter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VaclavVanikTest\\Soap\\Interpreter\\": "test/unit"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.2.x-dev"
+    }
+  }
+}
