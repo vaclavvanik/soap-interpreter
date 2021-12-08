@@ -13,7 +13,7 @@ use const SOAP_1_2;
 
 final class RequestTest extends TestCase
 {
-    public function testSoapRequest(): void
+    public function testRequest(): void
     {
         $uri = 'http://localhost';
         $body = '<root/>';
