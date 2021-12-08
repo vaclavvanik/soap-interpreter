@@ -10,7 +10,7 @@
         </include>
     </coverage>
     <testsuites>
-        <testsuite name="vaclavvanik/soap-wsdl">
+        <testsuite name="vaclavvanik/soap-interpreter">
             <directory>../../test/</directory>
         </testsuite>
     </testsuites>
