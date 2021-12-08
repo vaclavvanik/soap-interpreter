@@ -1,6 +1,6 @@
 {
   "name": "vaclavvanik/soap-interpreter",
-  "description": "An easy way to handle WSDL data with zero dependencies",
+  "description": "Interpreting of SOAP 1.1 and SOAP 1.2 messages",
   "license": "MIT",
   "type": "library",
   "homepage": "https://github.com/vaclavvanik/soap-interpreter",
