@@ -8,21 +8,21 @@ use DOMDocument;
 use PHPUnit\Framework\TestCase;
 use VaclavVanik\Soap\Interpreter\Exception\SoapFault;
 use VaclavVanik\Soap\Interpreter\Exception\ValueError;
-use VaclavVanik\Soap\Interpreter\Interpreter;
+use VaclavVanik\Soap\Interpreter\PhpInterpreter;
 
 use function file_get_contents;
 
 use const SOAP_1_1;
 use const SOAP_1_2;
 
-final class InterpreterTest extends TestCase
+final class PhpInterpreterTest extends TestCase
 {
     public function testFromWsdlThrowValueErrorException(): void
     {
         $this->expectException(ValueError::class);
         $this->expectExceptionMessage('Wsdl cannot be empty');
 
-        Interpreter::fromWsdl('');
+        PhpInterpreter::fromWsdl('');
     }
 
     /** @return iterable<string, array{string, string, int|null, string}> */
@@ -67,7 +67,7 @@ final class InterpreterTest extends TestCase
         $this->expectException(ValueError::class);
         $this->expectExceptionMessage($exceptionMessage);
 
-        Interpreter::fromNonWsdl($uri, $location, $soapVersion);
+        PhpInterpreter::fromNonWsdl($uri, $location, $soapVersion);
     }
 
     public function testInvalidWsdlThrowSoapFaultException(): void
@@ -75,10 +75,10 @@ final class InterpreterTest extends TestCase
         $this->expectException(SoapFault::class);
         $this->expectExceptionMessageMatches('/^SOAP-ERROR: Parsing WSDL/i');
 
-        Interpreter::fromWsdl('invalid-wsdl')->request('operation-name');
+        PhpInterpreter::fromWsdl('invalid-wsdl')->request('operation-name');
     }
 
-    /** @return iterable<string, array{Interpreter, string, array<string, string>, string, string, string, int}> */
+    /** @return iterable<string, array{PhpInterpreter, string, array<string, string>, string, string, string, int}> */
     public function provideRequest(): iterable
     {
         $operation = 'sayHello';
@@ -90,7 +90,7 @@ final class InterpreterTest extends TestCase
         $reqSoapAction =  $location . '#' . $operation;
 
         yield 'wsdl11' => [
-            Interpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl'),
+            PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl'),
             $operation,
             $parameters,
             $reqUriSoap11,
@@ -100,7 +100,7 @@ final class InterpreterTest extends TestCase
         ];
 
         yield 'wsdl12' => [
-            Interpreter::fromWsdl(__DIR__ . '/../fixtures/soap12.wsdl', SOAP_1_2),
+            PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap12.wsdl', SOAP_1_2),
             $operation,
             $parameters,
             $reqUriSoap12,
@@ -110,7 +110,7 @@ final class InterpreterTest extends TestCase
         ];
 
         yield 'uri_location_soap_11' => [
-            Interpreter::fromNonWsdl($location, $reqUriSoap11),
+            PhpInterpreter::fromNonWsdl($location, $reqUriSoap11),
             $operation,
             $parameters,
             $reqUriSoap11,
@@ -120,7 +120,7 @@ final class InterpreterTest extends TestCase
         ];
 
         yield 'uri_location_soap_12' => [
-            Interpreter::fromNonWsdl($location, $reqUriSoap12, SOAP_1_2),
+            PhpInterpreter::fromNonWsdl($location, $reqUriSoap12, SOAP_1_2),
             $operation,
             $parameters,
             $reqUriSoap12,
@@ -135,7 +135,7 @@ final class InterpreterTest extends TestCase
         $this->expectException(ValueError::class);
         $this->expectExceptionMessage('Operation cannot be empty');
 
-        Interpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl')->request('');
+        PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl')->request('');
     }
 
     /**
@@ -144,7 +144,7 @@ final class InterpreterTest extends TestCase
      * @dataProvider provideRequest
      */
     public function testRequest(
-        Interpreter $interpreter,
+        PhpInterpreter $interpreter,
         string $operation,
         array $parameters,
         string $reqUri,
@@ -160,35 +160,35 @@ final class InterpreterTest extends TestCase
         $this->assertSame($reqSoapVersion, $request->getSoapVersion());
     }
 
-    /** @return iterable<string, array{Interpreter, string, string, string}> */
+    /** @return iterable<string, array{PhpInterpreter, string, string, string}> */
     public function provideResponse(): iterable
     {
         $operation = 'sayHello';
         $result = 'Hello Venca';
 
         yield 'wsdl11' => [
-            Interpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl'),
+            PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl'),
             $operation,
             file_get_contents(__DIR__ . '/../fixtures/wsdl-response11.xml'),
             $result,
         ];
 
         yield 'wsdl12' => [
-            Interpreter::fromWsdl(__DIR__ . '/../fixtures/soap12.wsdl', SOAP_1_2),
+            PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap12.wsdl', SOAP_1_2),
             $operation,
             file_get_contents(__DIR__ . '/../fixtures/wsdl-response12.xml'),
             $result,
         ];
 
         yield 'uri_location_soap_11' => [
-            Interpreter::fromNonWsdl('https://example.com/say-hello/', '/soap11/say-hello'),
+            PhpInterpreter::fromNonWsdl('https://example.com/say-hello/', '/soap11/say-hello'),
             $operation,
             file_get_contents(__DIR__ . '/../fixtures/uri-response11.xml'),
             $result,
         ];
 
         yield 'uri_location_soap_12' => [
-            Interpreter::fromNonWsdl('https://example.com/say-hello/', '/soap12/say-hello', SOAP_1_2),
+            PhpInterpreter::fromNonWsdl('https://example.com/say-hello/', '/soap12/say-hello', SOAP_1_2),
             $operation,
             file_get_contents(__DIR__ . '/../fixtures/uri-response12.xml'),
             $result,
@@ -197,7 +197,7 @@ final class InterpreterTest extends TestCase
 
     /** @dataProvider provideResponse */
     public function testResponse(
-        Interpreter $interpreter,
+        PhpInterpreter $interpreter,
         string $operation,
         string $response,
         string $result
@@ -233,7 +233,7 @@ final class InterpreterTest extends TestCase
         $this->expectException(ValueError::class);
         $this->expectExceptionMessage($exceptionMessage);
 
-        Interpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl')->response($operation, $response);
+        PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl')->response($operation, $response);
     }
 
     public function testResponseThrowsSoapFault(): void
@@ -260,7 +260,7 @@ final class InterpreterTest extends TestCase
 </SOAP-ENV:Envelope>
 XML;
 
-        $interpreter = Interpreter::fromNonWsdl('https://example.com/say-hello/', '/soap11/say-hello');
+        $interpreter = PhpInterpreter::fromNonWsdl('https://example.com/say-hello/', '/soap11/say-hello');
         $interpreter->request('sayHello');
 
         $this->expectException(SoapFault::class);

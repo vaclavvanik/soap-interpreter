@@ -14,30 +14,30 @@ composer require vaclavvanik/soap-interpreter
 
 ## Usage
 
-An [Interpreter](src/Interpreter.php) is responsible for generating SOAP [request](src/Request.php) messages and translating SOAP [response](src/Response.php) messages.
+An [PhpInterpreter](src/PhpInterpreter.php) is responsible for generating SOAP [request](src/Request.php) messages and translating SOAP [response](src/Response.php) messages.
 
-### Create interpreter in WSDL mode:
+### Create PhpInterpreter in WSDL mode:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use VaclavVanik\Soap\Interpreter\Interpreter;
+use VaclavVanik\Soap\Interpreter\PhpInterpreter;
 
-$interpreter = Interpreter::fromWsdl('http://www.dneonline.com/calculator.asmx?wsdl');
+$interpreter = PhpInterpreter::fromWsdl('http://www.dneonline.com/calculator.asmx?wsdl');
 ```
 
-### Create interpreter in non-WSDL mode:
+### Create PhpInterpreter in non-WSDL mode:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use VaclavVanik\Soap\Interpreter\Interpreter;
+use VaclavVanik\Soap\Interpreter\PhpInterpreter;
 
-$interpreter = Interpreter::fromNonWsdl('http://tempuri.org/', 'http://www.dneonline.com/calculator.asmx');
+$interpreter = PhpInterpreter::fromNonWsdl('http://tempuri.org/', 'http://www.dneonline.com/calculator.asmx');
 ```
 
 ### Generate SOAP request message in WSDL mode
@@ -47,9 +47,9 @@ $interpreter = Interpreter::fromNonWsdl('http://tempuri.org/', 'http://www.dneon
 
 declare(strict_types=1);
 
-use VaclavVanik\Soap\Interpreter\Interpreter;
+use VaclavVanik\Soap\Interpreter\PhpInterpreter;
 
-$request = (Interpreter::fromWsdl('http://www.dneonline.com/calculator.asmx?wsdl'))->request('Add', ['Add' => ['intA' => 1, 'intB' => 3]]);
+$request = (PhpInterpreter::fromWsdl('http://www.dneonline.com/calculator.asmx?wsdl'))->request('Add', ['Add' => ['intA' => 1, 'intB' => 3]]);
 print_r($request->getBody());
 ```
 
@@ -74,7 +74,7 @@ Output:
 
 declare(strict_types=1);
 
-use VaclavVanik\Soap\Interpreter\Interpreter;
+use VaclavVanik\Soap\Interpreter\PhpInterpreter;
 
 $response = <<<XML
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
@@ -86,7 +86,7 @@ $response = <<<XML
 </SOAP-ENV:Envelope>
 XML;
 
-$response = (Interpreter::fromWsdl('http://www.dneonline.com/calculator.asmx?wsdl'))->response('Add', $response);
+$response = (PhpInterpreter::fromWsdl('http://www.dneonline.com/calculator.asmx?wsdl'))->response('Add', $response);
 print_r($response->getResult());
 ```
 
