@@ -16,7 +16,7 @@ composer require vaclavvanik/soap-interpreter
 
 An [PhpInterpreter](src/PhpInterpreter.php) is responsible for generating SOAP [request](src/Request.php) messages and translating SOAP [response](src/Response.php) messages.
 
-### Create PhpInterpreter in WSDL mode:
+### Create PhpInterpreter in WSDL mode
 
 ```php
 <?php
@@ -28,7 +28,7 @@ use VaclavVanik\Soap\Interpreter\PhpInterpreter;
 $interpreter = PhpInterpreter::fromWsdl('http://www.dneonline.com/calculator.asmx?wsdl');
 ```
 
-### Create PhpInterpreter in non-WSDL mode:
+### Create PhpInterpreter in non-WSDL mode
 
 ```php
 <?php
@@ -98,6 +98,10 @@ stdClass Object
     [AddResult] => 4
 )
 ```
+
+## Advanced WSDL usage
+
+Package [soap-interpreter-wsdl](https://github.com/vaclavvanik/soap-interpreter-wsdl) offers advanced WSDL usage.
 
 ## Exceptions
 
