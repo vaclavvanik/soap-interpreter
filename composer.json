@@ -23,9 +23,6 @@
     "php": "^7.3 || ^8.0",
     "ext-soap": "*"
   },
-  "require-dev": {
-
-  },
   "autoload": {
     "psr-4": {
       "VaclavVanik\\Soap\\Interpreter\\": "src/"

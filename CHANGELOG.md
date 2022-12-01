@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 0.3.0 - 2022-12-01
+
+Exception\SoapFault remove `final`.
+
 ## 0.2.0 - 2021-12-08
 
 **BC break**: promote Interpreter as interface. Former Interpreter renamed to PhpInterpreter and marked as final.
