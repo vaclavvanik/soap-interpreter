@@ -6,7 +6,7 @@ namespace VaclavVanik\Soap\Interpreter\Exception;
 
 use SoapFault as PhpSoapFault;
 
-class SoapFault extends PhpSoapFault implements Exception
+final class SoapFault extends PhpSoapFault implements Exception
 {
     public static function fromSoapFault(PhpSoapFault $e): self
     {
