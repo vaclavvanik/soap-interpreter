@@ -107,6 +107,7 @@ Package [soap-interpreter-wsdl](https://github.com/vaclavvanik/soap-interpreter-
 
 - [Exception\SoapFault](src/Exception/SoapFault.php) if soap fault thrown.
 - [Exception\ValueError](src/Exception/ValueError.php) if required argument is incorrect.
+- [Exception\Exception](src/Exception/Exception.php) if any other error occurs.
 
 ## Run check - coding standards and php-unit
 

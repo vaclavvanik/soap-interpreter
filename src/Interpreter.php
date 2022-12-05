@@ -16,6 +16,7 @@ interface Interpreter
      *
      * @throws Exception\SoapFault if soap fault thrown.
      * @throws Exception\ValueError if required argument is incorrect.
+     * @throws Exception\Exception if any other error occurs.
      */
     public function request(string $operation, array $parameters = [], array $soapHeaders = []): Request;
 
@@ -24,6 +25,7 @@ interface Interpreter
      *
      * @throws Exception\SoapFault if soap fault thrown.
      * @throws Exception\ValueError if required argument is incorrect.
+     * @throws Exception\Exception if any other error occurs.
      */
     public function response(string $operation, string $response): Response;
 }
