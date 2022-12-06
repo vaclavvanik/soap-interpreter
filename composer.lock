@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2aa66b8e79962694b600e13b55940f1",
-    "packages": [],
+    "content-hash": "7c7d0b20e8876730403f04ece876e8c1",
+    "packages": [
+        {
+            "name": "vaclavvanik/soap-wsdl",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vaclavvanik/soap-wsdl.git",
+                "reference": "7b3bc9e28c3bfc1cb039157a156d110505045458"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vaclavvanik/soap-wsdl/zipball/7b3bc9e28c3bfc1cb039157a156d110505045458",
+                "reference": "7b3bc9e28c3bfc1cb039157a156d110505045458",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "VaclavVanik\\Soap\\Wsdl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Václav Vaník",
+                    "email": "vaclav.vanik@gmail.com"
+                }
+            ],
+            "description": "An easy way to handle WSDL data with zero dependencies",
+            "homepage": "https://github.com/vaclavvanik/soap-wsdl",
+            "keywords": [
+                "soap",
+                "wsdl"
+            ],
+            "support": {
+                "issues": "https://github.com/vaclavvanik/soap-wsdl/issues",
+                "source": "https://github.com/vaclavvanik/soap-wsdl/tree/1.0.0"
+            },
+            "time": "2022-12-05T13:38:59+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
@@ -17,5 +68,5 @@
         "ext-soap": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

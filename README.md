@@ -4,6 +4,15 @@ This package provides interpreting of SOAP 1.1 and SOAP 1.2 messages.
 It can be used in WSDL or non-WSDL mode.
 The implementation is built on the top of PHP's [SoapClient](http://php.net/manual/en/class.soapclient.php).
 
+`It is not intended to use this package directly.`
+
+You can use:
+
+- [soap-binding](https://github.com/vaclavvanik/soap-binding) package
+for creating PSR-7 compliant SOAP requests and processing PSR-7 responses to SOAP.
+
+- [soap-client](https://github.com/vaclavvanik/soap-client) package for processing requests and responses with PSR HTTP client.
+
 ## Install
 
 You can install this package via composer. 
@@ -107,7 +116,10 @@ Package [soap-interpreter-wsdl](https://github.com/vaclavvanik/soap-interpreter-
 
 - [Exception\SoapFault](src/Exception/SoapFault.php) if soap fault thrown.
 - [Exception\ValueError](src/Exception/ValueError.php) if required argument is incorrect.
+- [Exception\WsdlParsingError](src/Exception/WsdlParsingError.php) if wsdl cannot be parsed..
 - [Exception\Exception](src/Exception/Exception.php) if any other error occurs.
+
+or `VaclavVanik\Soap\Wsdl\Exception\Exception` if other wsdl error occurs.
 
 ## Run check - coding standards and php-unit
 

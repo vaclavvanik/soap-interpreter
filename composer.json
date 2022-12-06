@@ -21,7 +21,8 @@
   },
   "require": {
     "php": "^7.3 || ^8.0",
-    "ext-soap": "*"
+    "ext-soap": "*",
+    "vaclavvanik/soap-wsdl": "^1.0.0"
   },
   "autoload": {
     "psr-4": {
@@ -35,7 +36,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.5.x-dev"
+      "dev-master": "1.0.x-dev"
     }
   }
 }
