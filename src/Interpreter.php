@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace VaclavVanik\Soap\Interpreter;
 
 use SoapHeader;
+use VaclavVanik\Soap\Wsdl;
 
 interface Interpreter
 {
@@ -16,6 +17,8 @@ interface Interpreter
      *
      * @throws Exception\SoapFault if soap fault thrown.
      * @throws Exception\ValueError if required argument is incorrect.
+     * @throws Exception\WsdlParsingError if wsdl cannot be parsed.
+     * @throws Wsdl\Exception\Exception if other wsdl error occurs.
      * @throws Exception\Exception if any other error occurs.
      */
     public function request(string $operation, array $parameters = [], array $soapHeaders = []): Request;
@@ -25,6 +28,8 @@ interface Interpreter
      *
      * @throws Exception\SoapFault if soap fault thrown.
      * @throws Exception\ValueError if required argument is incorrect.
+     * @throws Exception\WsdlParsingError if wsdl cannot be parsed.
+     * @throws Wsdl\Exception\Exception if other wsdl error occurs.
      * @throws Exception\Exception if any other error occurs.
      */
     public function response(string $operation, string $response): Response;

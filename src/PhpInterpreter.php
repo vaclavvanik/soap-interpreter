@@ -145,7 +145,7 @@ final class PhpInterpreter implements Interpreter
         }
     }
 
-    /** @throws Exception\SoapFault */
+    /** @throws Exception\WsdlParsingError */
     private function client(): Client
     {
         if ($this->soapClient) {
@@ -173,7 +173,7 @@ final class PhpInterpreter implements Interpreter
 
             $this->soapClient = new Client($this->wsdl, $options);
         } catch (SoapFault $e) {
-            throw Exception\SoapFault::fromSoapFault($e);
+            throw Exception\WsdlParsingError::fromThrowable($e);
         }
 
         return $this->soapClient;
