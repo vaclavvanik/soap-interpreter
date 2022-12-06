@@ -8,6 +8,7 @@ use DOMDocument;
 use PHPUnit\Framework\TestCase;
 use VaclavVanik\Soap\Interpreter\Exception\SoapFault;
 use VaclavVanik\Soap\Interpreter\Exception\ValueError;
+use VaclavVanik\Soap\Interpreter\Exception\WsdlParsingError;
 use VaclavVanik\Soap\Interpreter\PhpInterpreter;
 
 use function file_get_contents;
@@ -72,10 +73,17 @@ final class PhpInterpreterTest extends TestCase
 
     public function testInvalidWsdlThrowSoapFaultException(): void
     {
-        $this->expectException(SoapFault::class);
-        $this->expectExceptionMessageMatches('/^SOAP-ERROR: Parsing WSDL/i');
+        $this->expectException(WsdlParsingError::class);
 
         PhpInterpreter::fromWsdl('invalid-wsdl')->request('operation-name');
+    }
+
+    public function testRequestThrowValueErrorException(): void
+    {
+        $this->expectException(ValueError::class);
+        $this->expectExceptionMessage('Operation cannot be empty');
+
+        PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl')->request('');
     }
 
     /** @return iterable<string, array{PhpInterpreter, string, array<string, string>, string, string, string, int}> */
@@ -130,14 +138,6 @@ final class PhpInterpreterTest extends TestCase
         ];
     }
 
-    public function testRequestThrowValueErrorException(): void
-    {
-        $this->expectException(ValueError::class);
-        $this->expectExceptionMessage('Operation cannot be empty');
-
-        PhpInterpreter::fromWsdl(__DIR__ . '/../fixtures/soap11.wsdl')->request('');
-    }
-
     /**
      * @param array<string, string> $parameters
      *
@@ -155,7 +155,7 @@ final class PhpInterpreterTest extends TestCase
         $request = $interpreter->request($operation, $parameters);
 
         $this->assertSame($reqUri, $request->getUri());
-        $this->assertSame($this->loadXmlFile($reqBodyFile), $this->loadXmlString($request->getBody()));
+        $this->assertSame(self::loadXmlFile($reqBodyFile), self::loadXmlString($request->getBody()));
         $this->assertSame($reqSoapAction, $request->getSoapAction());
         $this->assertSame($reqSoapVersion, $request->getSoapVersion());
     }
@@ -269,7 +269,7 @@ XML;
         $interpreter->response('sayHello', $response);
     }
 
-    private function loadXmlFile(string $filename): string
+    private static function loadXmlFile(string $filename): string
     {
         $doc = new DOMDocument();
         $doc->preserveWhiteSpace = false;
@@ -281,7 +281,7 @@ XML;
         return $doc->saveXML();
     }
 
-    private function loadXmlString(string $xml): string
+    private static function loadXmlString(string $xml): string
     {
         $doc = new DOMDocument();
         $doc->preserveWhiteSpace = false;
